@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Kibet - Clinical Officer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Updated Color Scheme: Wine Stone, Red, and Tivoli Gold */
+        :root {
+            --wine-stone: #8B4513;      /* SaddleBrown - wine stone color */
+            --red: #B22222;              /* FireBrick - red color */
+            --tivoli-gold: #E6BE8A;      /* Tivoli gold color */
+            --light-accent: #F5F5DC;     /* Beige light accent */
+            --menu-width: 280px;
+        }
+        
+        /* Side Menu */
+        .side-menu {
+            position: fixed;
+            left: calc(-1 * var(--menu-width));
+            top: 0;
+            width: var(--menu-width);
+            height: 100%;
+            background: linear-gradient(to bottom, var(--wine-stone), var(--red));
+            color: white;
+            padding: 2rem 1rem;
+            transition: left 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .side-menu.active {
+            left: 0;
+        }
+        
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .menu-header h3 {
+            color: white;
+            font-size: 1.4rem;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .side-menu ul {
+            list-style: none;
+        }
+        
+        .side-menu li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        .side-menu a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .side-menu a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .side-menu i {
+            margin-right: 0.8rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--red);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            background: var(--wine-stone);
+            transform: scale(1.05);
+        }
+        
+        .menu-dash {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 2px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        body.menu-open {
+            margin-left: var(--menu-width);
+        }
+        
+        body.menu-open .menu-toggle {
+            left: calc(var(--menu-width) + 10px);
+        }
+        
+        body.menu-open .menu-dash:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        
+        body.menu-open .menu-dash:nth-child(2) {
+            opacity: 0;
+        }
+        
+        body.menu-open .menu-dash:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--red) 0%, var(--wine-stone) 100%);
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .profile-info {
+            flex: 2;
+        }
+        
+        .profile-img {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .profile-img img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img img:hover {
+            transform: scale(1.05);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--red);
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--tivoli-gold);
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            color: var(--wine-stone);
+            margin: 1.2rem 0 0.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 30px;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .personal-statement {
+            background: linear-gradient(to right, var(--light-accent), #ffffff);
+            border-left: 5px solid var(--tivoli-gold);
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .timeline-item {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--red);
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--red);
+        }
+        
+        .date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 0.3rem;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-category {
+            background: var(--light-accent);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--tivoli-gold);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-3px);
+        }
+        
+        .skill-category h4 {
+            color: var(--wine-stone);
+            margin-bottom: 0.8rem;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        li:before {
+            content: "•";
+            color: var(--red);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .references {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .reference-card {
+            background: var(--light-accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--tivoli-gold);
+            transition: transform 0.3s ease;
+        }
+        
+        .reference-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--wine-stone);
+            color: white;
+            margin-top: 2rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--red);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        /* Enhanced visual elements */
+        .kmtc-badge {
+            display: inline-block;
+            background: linear-gradient(to right, var(--red), var(--wine-stone));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+        
+        /* Biography section styles */
+        .biography-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        
+        .bio-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .bio-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .bio-highlights {
+            background: var(--light-accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            border-left: 4px solid var(--tivoli-gold);
+        }
+        
+        .bio-highlights h4 {
+            color: var(--wine-stone);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--red);
+            padding-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 900px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .biography-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-img {
+                margin-top: 1.5rem;
+            }
+            
+            .contact-info {
+                justify-content: center;
+            }
+            
+            body.menu-open {
+                margin-left: 0;
+            }
+            
+            .side-menu {
+                width: 80%;
+                left: -80%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .skills-grid, .references {
+                grid-template-columns: 1fr;
+            }
+            
+            .menu-toggle {
+                top: 15px;
+                left: 15px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Side Menu -->
+    <div class="side-menu">
+        <div class="menu-header">
+            <h3>Navigation Menu</h3>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <ul>
+            <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#biography"><i class="fas fa-book"></i> Biography</a></li>
+            <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+            <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+            <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
+            <li><a href="#research"><i class="fas fa-flask"></i> Research</a></li>
+            <li><a href="#references"><i class="fas fa-users"></i> References</a></li>
+            <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- Menu Toggle Button (Three Dashes) -->
+    <div class="menu-toggle">
+        <div class="menu-dash"></div>
+        <div class="menu-dash"></div>
+        <div class="menu-dash"></div>
+    </div>
+
+    <header id="home">
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-info">
+                    <h1>Eric Kibet</h1>
+                    <p class="tagline">Dedicated Clinical Officer with 15+ Years of Experience</p>
+                    <div class="contact-info">
+                        <div><i class="fas fa-envelope"></i> ekibet80@gmail.com</div>
+                        <div><i class="fas fa-phone"></i> +254726061599</div>
+                        <div><i class="fas fa-map-marker-alt"></i> Kibabii University Hospital</div>
+                    </div>
+                </div>
+                <div class="profile-img">
+                    <img src="profile .jpg" alt="Eric Kibet">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="about" class="section personal-statement">
+            <h2>Personal Statement</h2>
+            <p>I am a dedicated Clinical Officer with a Diploma in Clinical Medicine and over 15 years of clinical experience. Currently serving at Kibabii University Hospital, I am pursuing a Higher Diploma in Family Health at KMTC to enhance my skills in holistic patient care, preventive medicine, and community health.</p>
+            <p>My philosophy of care is rooted in holistic and family-centered health. I believe in preventive, promotive, curative, and rehabilitative care as the backbone of improving community health outcomes.</p>
+        </section>
+
+        <section id="biography" class="section">
+            <h2>Biography</h2>
+            <div class="biography-content">
+                <div class="bio-image">
+                    <img src="biography.jpg" alt="Eric Kibet at work">
+                </div>
+                <div class="bio-text">
+                    <p>Eric Kibet is  a dedicated Clinical Officer currently serving at Kibabii University Hospital, where he provides comprehensive healthcare services to students, staff, and the surrounding community. He holds a Diploma in Clinical Medicine and is presently advancing his expertise by pursuing a Higher Diploma in Family Health at the Kenya Medical Training College (KMTC).
+</p>
+                    
+                    <p>With a strong foundation in primary healthcare, disease prevention, and clinical management, Eric is passionate about improving access to quality medical care, promoting health education, and addressing the diverse needs of families. His professional journey reflects a commitment to continuous learning, teamwork, and patient-centered care.
+</p>
+                    
+                    <p>Beyond his clinical practice, Eric takes interest in community outreach, mentoring young healthcare trainees, and exploring innovations in family health and preventive medicine. His long-term goal is to specialize further in family and community health, contributing to the strengthening of Kenya's healthcare system.</p>
+                </div>
+            </div>
+            
+            <div class="bio-highlights">
+                <h4>Career Highlights</h4>
+                <ul>
+                    <li>Over 15 years of clinical experience in diverse healthcare settings</li>
+                    <li>Extensive work in both outpatient and inpatient care environments</li>
+                    <li>Specialization in family health and preventive medicine</li>
+                    <li>Mentorship of clinical medicine students and junior staff</li>
+                    <li>Active participation in community health outreach programs</li>
+                    <li>Ongoing research on HIV treatment adherence strategies</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="education" class="section">
+            <h2>Education</h2>
+            <div class="timeline-item">
+                <p class="date">Ongoing</p>
+                <h3>Higher Diploma in Family Health</h3>
+                <p>Kenya Medical Training College (KMTC)</p>
+                
+            </div>
+            <div class="timeline-item">
+                <p class="date">2008</p>
+                <h3>Diploma in Clinical Medicine and Surgery</h3>
+                <p>St. Mary's School of Clinical Medicine</p>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>Clinical Experience</h2>
+            <div class="timeline-item">
+                <p class="date">2014 - Present</p>
+                <h3>Clinical Officer</h3>
+                <p><strong>Kibabii University Hospital</strong></p>
+                <ul>
+                    <li>Provide comprehensive outpatient and inpatient care for a diverse patient population</li>
+                    <li>Conduct diagnosis and treatment for various medical conditions</li>
+                    <li>Develop and implement preventive health programs</li>
+                    <li>Mentor and supervise clinical medicine students</li>
+                    <li>Maintain accurate patient records and documentation</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <p class="date">2010 - 2014</p>
+                <h3>Clinical Officer</h3>
+                <p><strong>St. Damiano Hospital Bungoma</strong></p>
+                <ul>
+                    <li>Provided primary healthcare services to the local community</li>
+                    <li>Participated in community health outreach programs</li>
+                    <li>Collaborated with multidisciplinary healthcare teams</li>
+                </ul>
+            </div>
+            <div class="timeline-item">
+                <p class="date">Current</p>
+                <h3>Mentorship Program</h3>
+                <p><strong>Bungoma County Referral Hospital</strong></p>
+                <p>Undergoing mentorship under Family Physician Dr. Were</p>
+            </div>
+        </section>
+
+        <div class="two-column">
+            <section id="skills" class="section">
+                <h2>Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Clinical Skills</h4>
+                        <ul>
+                            <li>Patient assessment and management</li>
+                            <li>Emergency and critical care</li>
+                            <li>Diagnosis and treatment</li>
+                            <li>Minor surgical procedures</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Family Health</h4>
+                        <ul>
+                            <li>Family health practice</li>
+                            <li>Preventive and community health services</li>
+                            <li>Maternal and child health</li>
+                            <li>Chronic disease management</li>
+                        </ul>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Professional Skills</h4>
+                        <ul>
+                            <li>Leadership and teamwork in clinical settings</li>
+                            <li>Student supervision and mentorship</li>
+                            <li>Record keeping and research skills</li>
+                            <li>Health education and counseling</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="research" class="section">
+                <h2>Research & Academic Work</h2>
+                <div class="timeline-item">
+                    <h3>Current Research Project</h3>
+                    <p><strong>Causes of Defaulting in HIV Treatment</strong></p>
+                    <p>Conducting research on socio-economic and structural factors contributing to HIV treatment defaulting as part of Higher Diploma program. Aiming to develop improved patient retention strategies.</p>
+                </div>
+                
+                <h2>Professional Membership</h2>
+                <ul>
+                    <li>Clinical Officers Council (COC) - Registration number 6991</li>
+                    <li>Kenya Union of Clinical Officers (KUCO)</li>
+                </ul>
+                
+                <h2>CPD & Community Work</h2>
+                <ul>
+                    <li>KUCO Conference Bungoma - April 2025</li>
+                    <li>Community outreach at Mayanja Health Center - May 2025</li>
+                    <li>Health education programs in local schools</li>
+                </ul>
+            </section>
+        </div>
+
+        <section id="references" class="section">
+            <h2>References</h2>
+            <div class="references">
+                <div class="reference-card">
+                    <h3>Mr. Johnston Eshirera</h3>
+                    <p>Head of Department</p>
+                    <p>Kibabii University</p>
+                    <p>0721571369</p>
+                </div>
+                <div class="reference-card">
+                    <h3>Mr. Alex Chweya</h3>
+                    <p>Coordinator, Family Health</p>
+                    <p>Nairobi</p>
+                    <p>0720573513</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>Contact Me</h2>
+            <p>If you'd like to get in touch, please feel free to reach out via email or phone:</p>
+            <div class="contact-info">
+                <div><i class="fas fa-envelope"></i> ekibet80@gmail.com</div>
+                <div><i class="fas fa-phone"></i> +254726061599</div>
+                <div><i class="fas fa-map-marker-alt"></i> Kibabii University Hospital</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Eric Kibet - Clinical Officer Portfolio</p>
+            <p>Email: ekibet80@gmail.com | Phone: +254726061599</p>
+            <p>Proudly associated with KMTC - Kenya Medical Training College</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Side menu toggle
+        const menuToggle = document.querySelector(".menu-toggle");
+        const sideMenu = document.querySelector(".side-menu");
+        const closeMenu = document.querySelector(".close-menu");
+        const body = document.body;
+        
+        menuToggle.addEventListener("click", () => {
+            body.classList.toggle("menu-open");
+            sideMenu.classList.toggle("active");
+        });
+        
+        closeMenu.addEventListener("click", () => {
+            body.classList.remove("menu-open");
+            sideMenu.classList.remove("active");
+        });
+        
+        // Close menu when clicking on a link
+        document.querySelectorAll(".side-menu a").forEach(link => {
+            link.addEventListener("click", () => {
+                body.classList.remove("menu-open");
+                sideMenu.classList.remove("active");
+                
+                // Get the target section
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Scroll to the target section
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Close menu when clicking outside of it
+        document.addEventListener("click", (e) => {
+            const isMenuClick = sideMenu.contains(e.target);
+            const isToggleClick = menuToggle.contains(e.target);
+            
+            if (body.classList.contains("menu-open") && !isMenuClick && !isToggleClick) {
+                body.classList.remove("menu-open");
+                sideMenu.classList.remove("active");
+            }
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector(".back-to-top");
+        
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add("visible");
+            } else {
+                backToTopButton.classList.remove("visible");
+            }
+        });
+        
+        backToTopButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
